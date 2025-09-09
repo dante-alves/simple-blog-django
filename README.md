@@ -69,8 +69,11 @@ Instale todas as dependências listadas no arquivo `requirements.txt`:
 python -m pip install -r requirements.txt
 ```
 ---
-
-### 5. Rodando o projeto
+### 5. Gerando o banco de dados
+```bash
+python manage.py migrate
+```
+### 6. Rodando o projeto
 Após instalar, inicie o servidor Django:
 
 ```bash
