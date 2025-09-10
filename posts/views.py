@@ -23,3 +23,25 @@ def post_new(request):
     else:
         form = forms.CreatePost()
     return render(request, 'posts/post_new.html', {'form': form})
+
+def post_update(request, slug):
+    post = Post.objects.get(slug=slug)
+    if request.method == 'POST':
+        form = forms.CreatePost(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('posts:page', slug=post.slug)
+    else:
+        form = forms.CreatePost(instance=post)
+    
+    context = {
+        'form': form,
+        'post': post
+    }
+    return render(request, 'posts/post_update.html', context)
+
+def post_delete(request, slug):
+    post = Post.objects.get(slug=slug)
+    if request.method == 'POST':
+        post.delete()
+    return redirect('posts:list')
